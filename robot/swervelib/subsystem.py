@@ -5,6 +5,7 @@ from typing import Callable, Optional
 
 import commands2
 import ctre
+import navx
 import wpilib
 
 import wpimath.controller
@@ -91,8 +92,10 @@ class Swerve(commands2.SubsystemBase):
         if swerve_params.fake_gyro:
             self.gyro = Dummy()
         else:
-            self.gyro = ctre.WPI_PigeonIMU(swerve_params.gyro_id)
-        self.gyro.configFactoryDefault()
+            # self.gyro = ctre.WPI_PigeonIMU(swerve_params.gyro_id)
+            self.gyro = navx.AHRS
+        # self.gyro.configFactoryDefault()
+        self.gyro.calibrate
         self.zero_heading()
 
         # Sort the module parameters list into front-left, front-right, back-left, back-right order
@@ -189,7 +192,8 @@ class Swerve(commands2.SubsystemBase):
             mod.desire_state(desired_states[i], False)
 
     def zero_heading(self):
-        self.gyro.setYaw(0)
+        # self.gyro.setYaw(0)
+        self.gyro.zeroYaw
 
     def reset_odometry(self, pose: Pose2d):
         self.odometry.resetPosition(self.heading, self.module_positions, pose)
@@ -229,7 +233,8 @@ class Swerve(commands2.SubsystemBase):
 
     @property
     def heading(self) -> Rotation2d:
-        yaw = self.gyro.getYaw()
+        # yaw = self.gyro.getYaw()
+        yaw = self.gyro.getYaw
 
         # Because the encoder is absolute and always reports its actual rotation,
         # subtract the yaw from 360 degrees to invert.
