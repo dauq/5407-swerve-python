@@ -15,8 +15,8 @@ class RobotContainer:
 
         # track_width = (21.73 * u.inch).m_as(u.m)
         # wheel_base = (21.73 * u.inch).m_as(u.m)
-        track_width = 0.565 * u.m
-        wheel_base = 0.565 * u.m
+        track_width = (0.565 * u.m).m_as(u.m)
+        wheel_base = (0.565 * u.m).m_as(u.m)
 
         # fmt: off
         swerve_params = CTRESwerveParameters(
@@ -79,7 +79,7 @@ class RobotContainer:
             CTRESwerveModuleParameters(
                 corner=ModuleCorner.FRONT_LEFT,
                 relative_position=Translation2d(wheel_base / 2, track_width / 2),
-                angle_offset=Rotation2d.fromDegrees(0),
+                angle_offset=Rotation2d.fromDegrees(191.0),
                 drive_motor_id=CanFDDeviceID(21),
                 angle_motor_id=CanFDDeviceID(25),
                 angle_encoder_id=CanFDDeviceID(35),
@@ -87,7 +87,7 @@ class RobotContainer:
             CTRESwerveModuleParameters(
                 corner=ModuleCorner.FRONT_RIGHT,
                 relative_position=Translation2d(wheel_base / 2, -track_width / 2),
-                angle_offset=Rotation2d.fromDegrees(0),
+                angle_offset=Rotation2d.fromDegrees(112.9),
                 drive_motor_id=CanFDDeviceID(22),
                 angle_motor_id=CanFDDeviceID(26),
                 angle_encoder_id=CanFDDeviceID(36),
@@ -95,7 +95,7 @@ class RobotContainer:
             CTRESwerveModuleParameters(
                 corner=ModuleCorner.BACK_LEFT,
                 relative_position=Translation2d(-wheel_base / 2, track_width / 2),
-                angle_offset=Rotation2d.fromDegrees(0),
+                angle_offset=Rotation2d.fromDegrees(162.5),
                 drive_motor_id=CanFDDeviceID(23),
                 angle_motor_id=CanFDDeviceID(27),
                 angle_encoder_id=CanFDDeviceID(37),
@@ -103,7 +103,7 @@ class RobotContainer:
             CTRESwerveModuleParameters(
                 corner=ModuleCorner.BACK_RIGHT,
                 relative_position=Translation2d(-wheel_base / 2, -track_width / 2),
-                angle_offset=Rotation2d.fromDegrees(0),
+                angle_offset=Rotation2d.fromDegrees(144.5),
                 drive_motor_id=CanFDDeviceID(24),
                 angle_motor_id=CanFDDeviceID(28),
                 angle_encoder_id=CanFDDeviceID(38),

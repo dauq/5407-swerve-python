@@ -93,9 +93,9 @@ class Swerve(commands2.SubsystemBase):
             self.gyro = Dummy()
         else:
             # self.gyro = ctre.WPI_PigeonIMU(swerve_params.gyro_id)
-            self.gyro = navx.AHRS
+            self.gyro = navx.AHRS.create_spi()
         # self.gyro.configFactoryDefault()
-        self.gyro.calibrate
+        self.gyro.calibrate()
         self.zero_heading()
 
         # Sort the module parameters list into front-left, front-right, back-left, back-right order
@@ -234,7 +234,7 @@ class Swerve(commands2.SubsystemBase):
     @property
     def heading(self) -> Rotation2d:
         # yaw = self.gyro.getYaw()
-        yaw = self.gyro.getYaw
+        yaw = self.gyro.getYaw()
 
         # Because the encoder is absolute and always reports its actual rotation,
         # subtract the yaw from 360 degrees to invert.
