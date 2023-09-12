@@ -111,15 +111,20 @@ class RobotContainer:
         )
         # fmt: on
 
-        self.stick = wpilib.Joystick(0)
+        # self.stick = wpilib.Joystick(0)
+        self.drivecontroller = wpilib.XboxController(0)
 
         self.swerve = Swerve(module_params, swerve_params)
         self.swerve.setDefaultCommand(
             self.swerve.teleop_command(
-                lambda: deadband(-self.stick.getRawAxis(1), 0.01),
-                lambda: deadband(self.stick.getRawAxis(0), 0.01),
-                lambda: deadband(-self.stick.getRawAxis(2), 0.01),  # Invert for CCW+
-                field_relative,
+                # lambda: deadband(-self.stick.getRawAxis(1), 0.01),
+                # lambda: deadband(self.stick.getRawAxis(0), 0.01),
+                # lambda: deadband(-self.stick.getRawAxis(2), 0.01),  # Invert for CCW+
+                lambda: deadband(-self.drivecontroller.getLeftY(), 0.01),
+                lambda: deadband( self.drivecontroller.getLeftX(), 0.01),
+                lambda: deadband(-self.drivecontroller.getRightX(), 0.01),  # Invert for CCW+
+                # field_relative,
+                not self.drivecontroller.getRightBumper(),
                 open_loop,
             )
         )
